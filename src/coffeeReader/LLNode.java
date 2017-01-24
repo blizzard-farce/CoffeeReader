@@ -1,4 +1,4 @@
-package queueView;
+package coffeeReader;
 
 /**
  * @author Sam Rowe

@@ -1,10 +1,10 @@
 /**
  * 
  */
-package queueView;
+package coffeeReader;
 
 /**
- * @author blizz
+ * @author Sam Rowe
  *
  */
 public class QueueReader {
