@@ -32,8 +32,8 @@ public class SortedLinkedList<T>
 	public void add(T info)
 	{
 		LLNode<T> newNode = new LLNode<T>(info);
-		newNode.setLink(currNode);
-		currNode = newNode;
+		newNode.setLink(head);
+		head = newNode;
 	}
 	
 	/**
@@ -215,5 +215,22 @@ public class SortedLinkedList<T>
 		
 		prevC.setLink(nodeO);
 		prevO.setLink(nodeC);
+	}
+	
+	/**
+	 * simple print method that prints the contents of each link 
+	 * in the list on their own line
+	 * primarily for testing output
+	 */
+	public void print()
+	{
+		resetCurrNode();
+		while (currNode.getLink() != null)
+		{
+			T currNodeInfo = currNode.getInfo();
+			System.out.println(currNodeInfo);
+			
+			currNode = currNode.getLink();
+		}
 	}
 }

@@ -1,0 +1,31 @@
+SR number
+String age
+float age
+open date
+SLA
+SLA remaining in minutes
+Total SLA in minutes
+SLA clock running or stopped
+Update frequency
+days remaining to update
+Entitlement
+Breakout (age grouping)
+Team
+Origin
+Contact
+Status
+Substatus
+Summary
+Description
+Mnemonic
+Environment
+ECD date/time
+Escalation date/time
+Priority
+Severity
+String last update
+float last update
+Solution family
+Solution
+Solution detail
+Facility
