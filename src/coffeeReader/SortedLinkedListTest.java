@@ -24,12 +24,12 @@ public class SortedLinkedListTest {
 		XSSFWorkbook wb = new XSSFWorkbook(pkg);
 		XSSFSheet sheet = wb.getSheetAt(0);
 		
-		SortedLinkedList<ArrayList<String>> listTest = new SortedLinkedList();
+		SortedLinkedList<ArrayList<String>> listTest = new SortedLinkedList<ArrayList<String>>();
 		
 		for (Row row : sheet)
 		{
-			ArrayList<String> array = new ArrayList();
-			int cellNum = 0;
+			ArrayList<String> array = new ArrayList<String>();
+			//int cellNum = 0;
 			for (Cell cell : row)
 			{
 				//array.add(cell.getStringCellValue());
@@ -48,15 +48,16 @@ public class SortedLinkedListTest {
 					array.add("");
 					break;
 				}
-				cellNum++;
+				//cellNum++;
 			}
 			listTest.add(array);
 		}
+		wb.close();
 	}
 
 	@Test
 	public void testSortedLinkedList() {
-		SortedLinkedList test = new SortedLinkedList();
+		SortedLinkedList<?> test = new SortedLinkedList<Object>();
 	}
 
 	@Test
@@ -111,12 +112,12 @@ public class SortedLinkedListTest {
 		XSSFWorkbook wb = new XSSFWorkbook(pkg);
 		XSSFSheet sheet = wb.getSheetAt(0);
 		
-		SortedLinkedList<ArrayList<String>> listTest = new SortedLinkedList();
+		SortedLinkedList<ArrayList<String>> listTest = new SortedLinkedList<ArrayList<String>>();
 		
 		for (Row row : sheet)
 		{
-			ArrayList<String> array = new ArrayList();
-			int cellNum = 0;
+			ArrayList<String> array = new ArrayList<String>();
+			//int cellNum = 0;
 			for (Cell cell : row)
 			{
 				//array.add(cell.getStringCellValue());
@@ -135,12 +136,14 @@ public class SortedLinkedListTest {
 					array.add("");
 					break;
 				}
-				cellNum++;
+				//cellNum++;
 			}
 			listTest.add(array);
 		}
 		
 		listTest.print();
+		
+		wb.close();
 	}
 
 }
