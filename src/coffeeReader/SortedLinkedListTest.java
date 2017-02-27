@@ -32,7 +32,6 @@ public class SortedLinkedListTest {
 			int cellNum = 0;
 			for (Cell cell : row)
 			{
-				//array.add(cell.getStringCellValue());
 				switch(cell.getCellTypeEnum())
 				{
 				case STRING:
@@ -56,17 +55,17 @@ public class SortedLinkedListTest {
 
 	@Test
 	public void testSortedLinkedList() {
-		SortedLinkedList test = new SortedLinkedList();
+		SortedLinkedList<ArrayList<String>> test = new SortedLinkedList();
 	}
 
 	@Test
 	public void testSortedLinkedListT() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAdd() {
-		fail("Not yet implemented");
+		ArrayList<String> testArray = new ArrayList();
+		
+		testArray.add("foo");
+		testArray.add("bar");
+		
+		SortedLinkedList<ArrayList<String>> test = new SortedLinkedList(testArray);
 	}
 
 	@Test
@@ -76,12 +75,16 @@ public class SortedLinkedListTest {
 
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		SortedLinkedList<ArrayList<String>> test = new SortedLinkedList();
+		assertEquals(true, test.isEmpty());
+		
+		test.add(new ArrayList());
+		assertEquals(false, test.isEmpty());
 	}
 
 	@Test
 	public void testFind() {
-		fail("Not yet implemented");
+		listTest.find();
 	}
 
 	@Test
@@ -119,7 +122,6 @@ public class SortedLinkedListTest {
 			int cellNum = 0;
 			for (Cell cell : row)
 			{
-				//array.add(cell.getStringCellValue());
 				switch(cell.getCellTypeEnum())
 				{
 				case STRING:

@@ -1,5 +1,7 @@
 package coffeeReader;
 
+import java.util.ArrayList;
+
 public class SortedLinkedList<T> 
 {
 	LLNode<T> head; //stores the start of the list
@@ -79,6 +81,8 @@ public class SortedLinkedList<T>
 	/**
 	 * returns true if given info is found in list
 	 * returns false if info doesn't exist in list
+	 * 
+	 * basic implementation that takes generic type argument
 	 * @param info
 	 * @return
 	 */
@@ -99,11 +103,42 @@ public class SortedLinkedList<T>
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * returns true if given info is found in list
+	 * returns false if info doesn't exist in list
+	 * 
+	 * overloaded implementation for ArrayList using index of node's info
+	 * @param info
+	 * @param index
+	 * @return
+	 */
+	public boolean find(T info, int index)
+	{
+		resetCurrNode();
 		
+		while (currNode.getLink() != null)
+		{
+			ArrayList<String> testArray = (ArrayList<String>) currNode.getInfo();
+			
+			if (testArray.get(index) == info)
+			{
+				return true;
+			}
+			else
+			{
+				currNode = currNode.getLink();
+			}
+		}
+		
+		return false;
 	}
 	
 	/**
 	 * iterates through list until given node is the next node
+	 * 
+	 * returns the previous node to the supplied node
 	 * @param node
 	 */
 	public LLNode<T> findPrevious(LLNode<T> node)
@@ -136,27 +171,55 @@ public class SortedLinkedList<T>
 	 * sorts list by comparing first element to second, then third...
 	 * first element after sorting will be the largest
 	 * 
+	 * currently set up to only handle info of type ArrayList<String>
+	 * will need to be generalized to reuse for other projects
+	 * 
 	 * @param index is the index of the array in each node that will be sorted on
 	 * @param sortFlag true for descending, false for ascending
 	 */
-	public void sort(int index, boolean sortFlag)
+	public void sort(int index, boolean sortFlag) throws InvalidSortTypeException
 	{
 		resetCurrNode();
 		
 		LLNode<T> otherNode;
-		String[] currNodeArray;
-		String[] otherNodeArray;
+//		T currNodeInfo; currently unused - might be needed for generalized types
+//		T otherNodeInfo;
+		ArrayList<String> currNodeArray;
+		ArrayList<String> otherNodeArray;
 		
+		//sortFlag = true means that the array will be sorted largest to smallest
 		if (sortFlag)
 		{
+			//
 			while (currNode.getLink() != null)
 			{
-				currNodeArray = (String[]) currNode.getInfo();
+//				currNodeInfo = currNode.getInfo();
+				//sets otherNode as the node immediately following currNode
 				otherNode = currNode.getLink();
+				
+				//checking to make sure that currNode info is an appropriate type for the sort function
+				if (currNode.getInfo() instanceof ArrayList)
+				{
+					currNodeArray = (ArrayList<String>) currNode.getInfo();
+				}
+				else
+				{
+					throw new InvalidSortTypeException("Unexpected class encountered on currNode");
+				}
+				
 				while (otherNode.getLink() != null)
 				{
-					otherNodeArray = (String[]) otherNode.getInfo();
-					if (currNodeArray[index].compareTo(otherNodeArray[index]) < 0)
+//					otherNodeInfo = otherNode.getInfo();
+					if(otherNode.getInfo() instanceof ArrayList)
+					{
+						otherNodeArray = (ArrayList<String>) otherNode.getInfo();
+					}
+					else
+					{
+						throw new InvalidSortTypeException("Unexpected class encountered on otherNode");
+					}
+					
+					if (currNodeArray.get(index).compareTo(otherNodeArray.get(index)) < 0)
 					{
 						trade(currNode, otherNode);
 					}
@@ -169,12 +232,29 @@ public class SortedLinkedList<T>
 		{
 			while (currNode.getLink() != null)
 			{
-				currNodeArray = (String[]) currNode.getInfo();
+//				currNodeInfo = currNode.getInfo();
+				if (currNode.getInfo() instanceof ArrayList)
+				{
+					currNodeArray = (ArrayList<String>) currNode.getInfo();
+				}
+				else
+				{
+					throw new InvalidSortTypeException("Unexpected class encountered on currNode");
+				}
+				
 				otherNode = currNode.getLink();
 				while (otherNode.getLink() != null)
 				{
-					otherNodeArray = (String[]) otherNode.getInfo();
-					if (currNodeArray[index].compareTo(otherNodeArray[index]) > 0)
+//					otherNodeInfo = otherNode.getInfo();
+					if (otherNode.getInfo() instanceof ArrayList)
+					{
+						otherNodeArray = (ArrayList<String>) otherNode.getInfo();
+					}
+					else
+					{
+						throw new InvalidSortTypeException("Unexpected class found on otherNode");
+					}
+					if (currNodeArray.get(index).compareTo(otherNodeArray.get(index)) > 0)
 					{
 						trade(currNode, otherNode);
 					}
