@@ -29,6 +29,7 @@ public class QueueReader {
 		 * XSSFSheet sheet is created and set to the first sheet in the document -
 		 * Sheet1 that contains the queue
 		 */
+		
 		OPCPackage pkg = OPCPackage.open(new File("SRM - QueueView.xlsx"));
 		XSSFWorkbook wb = new XSSFWorkbook(pkg);
 		XSSFSheet sheet = wb.getSheetAt(0);
@@ -38,6 +39,10 @@ public class QueueReader {
 		SortedLinkedList<ArrayList<String>> list = new SortedLinkedList<ArrayList<String>>();
 		for (Row row : sheet)
 		{
+			if (row.getRowNum() == 0)
+			{
+				continue;
+			}
 			//Create new ArrayList
 			ArrayList<String> array = new ArrayList<String>();
 			for (Cell cell : row)
@@ -45,19 +50,18 @@ public class QueueReader {
 				//fill each element in ArrayList with next element in row
 				switch(cell.getCellTypeEnum())
 				{
-				
-				case STRING:
-					array.add(cell.getStringCellValue());
-					break;
-				case NUMERIC:
-					array.add(Double.toString(cell.getNumericCellValue()));
-					break;
-				case BLANK:
-					array.add("");
-					break;
-				default:
-					array.add("");
-					break;
+					case STRING:
+						array.add(cell.getStringCellValue());
+						break;
+					case NUMERIC:
+						array.add(Double.toString(cell.getNumericCellValue()));
+						break;
+					case BLANK:
+						array.add("");
+						break;
+					default:
+						array.add("");
+						break;
 				}
 			}
 			//at end of row, add ArrayList to SortedLinkedList
@@ -78,5 +82,4 @@ public class QueueReader {
 		wb.close();
 		pkg.close();
 	}
-
 }
